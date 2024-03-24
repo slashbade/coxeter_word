@@ -62,11 +62,6 @@ def pattern (s1 : S) (s2 : S) (m12 : Nat) : S × List S × List S :=
     | true => (s2, s1 :: p1, s2 :: p2)
     | false => (s1, s2 :: p1, s1 :: p2)
 
-
-
-#eval pattern a b 5
-
-
 def braid_move_aux (pattern1 : List S) (pattern2 : List S) (pattern_length : Nat) : List S → List S :=
   fun l => match l with
   | [] => []
@@ -92,20 +87,6 @@ def braid_move_Nth (br : BraidRelation) (w : List S) (n : Nat) : List S :=
       match w.take p1.length == p1 with
       | true => x :: (braid_move_Nth br xs n)
       | false => x :: (braid_move_Nth br xs (n+1))
-
-
-def w1 := [a, b, a, b, a, b, a, b]
-
-#eval braid_move_Nth br12 w1 3
-#eval w.removeNth 3
-
-def w2 := [c, c, b,b, c, c, c]
-#eval nil_move w2
-
-#eval nil_move (braid_move br12 (nil_move (braid_move br12 w)))
-
-
-#eval (nil_move ∘ nil_move) w
 
 
 def nil_move_rec (w : List S) : List S :=
